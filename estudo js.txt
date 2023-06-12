@@ -1,0 +1,390 @@
+function isPrime(number) {
+// Verifica se o número é menor que 2, o que não é primo
+  if (number < 2) {
+    return false;}
+// Verifica se o número é igual a 2, o único número primo par
+  if (number === 2) {
+    return true;}
+// Verifica se o número é divisível por algum número de 2 até a raiz quadrada do número
+  for (let i = 2; i <= Math.sqrt(number); i++) {
+    if (number % i === 0) {
+      return false;}}
+// Se não for divisível por nenhum número, é primo
+  return true;}
+// Exemplos de uso da função
+console.log(isPrime(7));  // true
+console.log(isPrime(12)); // false
+console.log(isPrime(23)); // true
+console.log(isPrime(1));  // false
+
+2
+function reverseString(str) {
+// Converte a string em um array de caracteres, inverte o array e, em seguida, junta os caracteres novamente em uma string
+  return str.split('').reverse().join('');
+}
+// Exemplo de uso da função
+console.log(reverseString('Olá, mundo!')); // !odnum ,álO
+
+3
+function encontrarMaiorElemento(matriz) {
+  if (matriz.length === 0) {
+    // Retorna null se a matriz estiver vazia
+    return null;
+  }
+
+  let maiorElemento = matriz[0][0];
+
+  for (let i = 0; i < matriz.length; i++) {
+    for (let j = 0; j < matriz[i].length; j++) {
+      if (matriz[i][j] > maiorElemento) {
+        maiorElemento = matriz[i][j];
+      }
+    }
+  }
+
+  return maiorElemento;
+}
+const matriz = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+];
+
+const maiorElemento = encontrarMaiorElemento(matriz);
+console.log(maiorElemento); // Saída: 9
+
+4
+function calcularEstatisticas(vetor) {
+  if (vetor.length === 0) {
+    // Retorna null se o vetor estiver vazio
+    return null;
+  }
+
+  let maiorNumero = vetor[0];
+  let menorNumero = vetor[0];
+  let soma = vetor[0];
+
+  for (let i = 1; i < vetor.length; i++) {
+    if (vetor[i] > maiorNumero) {
+      maiorNumero = vetor[i];
+    }
+    if (vetor[i] < menorNumero) {
+      menorNumero = vetor[i];
+    }
+    soma += vetor[i];
+  }
+
+  const media = soma / vetor.length;
+
+  return {
+    maior: maiorNumero,
+    menor: menorNumero,
+    media: media
+  };
+}
+
+// Exemplo de uso
+const numeros = [5, 10, 3, 8, 12, 1];
+const estatisticas = calcularEstatisticas(numeros);
+
+console.log(estatisticas.maior); // Saída: 12
+console.log(estatisticas.menor); // Saída: 1
+console.log(estatisticas.media); // Saída: 6.5
+
+
+5
+function contarFrequencia(vetor) {
+  var frequencia = {};
+
+  for (var i = 0; i < vetor.length; i++) {
+    var elemento = vetor[i];
+    if (frequencia[elemento]) {
+      frequencia[elemento]++;
+    } else {
+      frequencia[elemento] = 1;
+    }
+  }
+
+  return frequencia;
+}
+
+var vetor = [1, 2, 2, 3, 1, 1, 4];
+var resultado = contarFrequencia(vetor);
+console.log(resultado);
+
+6
+function verificarSenha(senha) {
+  // Verificar o comprimento da senha
+  if (senha.length < 8) {
+    return false;
+  }
+
+  // Verificar se contém uma letra maiúscula
+  var regexMaiuscula = /[A-Z]/;
+  if (!regexMaiuscula.test(senha)) {
+    return false;
+  }
+
+  // Verificar se contém uma letra minúscula
+  var regexMinuscula = /[a-z]/;
+  if (!regexMinuscula.test(senha)) {
+    return false;
+  }
+
+  // Verificar se contém um número
+  var regexNumero = /[0-9]/;
+  if (!regexNumero.test(senha)) {
+    return false;
+  }
+
+  // Senha atende a todos os critérios
+  return true;
+}
+
+// Exemplo de uso:
+var senha1 = "Senha123";
+var senha2 = "senhafraca";
+var senha3 = "SENHAFORTE1";
+
+console.log(verificarSenha(senha1)); // false
+console.log(verificarSenha(senha2)); // false
+console.log(verificarSenha(senha3)); // true
+
+
+7
+function removeDuplicates(arr) {
+  // Usamos um objeto para rastrear os elementos únicos
+  const uniqueElements = {};
+
+  // Percorremos a matriz original
+  for (let i = 0; i < arr.length; i++) {
+    // Adicionamos cada elemento como uma propriedade do objeto
+    // Isso garantirá que apenas os elementos únicos sejam armazenados
+    uniqueElements[arr[i]] = true;
+  }
+
+  // Retornamos as chaves (elementos únicos) do objeto como uma nova matriz
+  return Object.keys(uniqueElements).map(Number);
+}
+
+// Exemplo de uso:
+const matrizOriginal = [1, 2, 2, 3, 1, 4];
+const matrizSemDuplicados = removeDuplicates(matrizOriginal);
+console.log(matrizSemDuplicados); // Output: [1, 2, 3, 4]
+
+8
+function isPalindrome(str) {
+  // Removemos espaços e pontuações da string e a transformamos em letras minúsculas
+  const cleanedStr = str.toLowerCase().replace(/[^a-zA-Z0-9]/g, '');
+
+  // Percorremos a string até a metade
+  for (let i = 0; i < Math.floor(cleanedStr.length / 2); i++) {
+    // Verificamos se o caractere atual é diferente do seu correspondente na outra metade da string
+    if (cleanedStr[i] !== cleanedStr[cleanedStr.length - 1 - i]) {
+      return false; // Não é um palíndromo
+    }
+  }
+
+  return true; // É um palíndromo
+}
+
+// Exemplos de uso:
+console.log(isPalindrome("A base do teto desaba")); // Output: true
+console.log(isPalindrome("Amor, Roma")); // Output: true
+console.log(isPalindrome("Hello, World!")); // Output: false
+
+9function calcularFatorial(numero) {
+  // Verificamos se o número é válido (inteiro positivo)
+  if (numero < 0 || !Number.isInteger(numero)) {
+    return "O número deve ser um inteiro positivo.";
+  }
+
+  // Caso base: fatorial de 0 é 1
+  if (numero === 0) {
+    return 1;
+  }
+
+  let fatorial = 1;
+
+  // Calculamos o fatorial
+  for (let i = 1; i <= numero; i++) {
+    fatorial *= i;
+  }
+
+  return fatorial;
+}
+
+// Exemplo de uso:
+console.log(calcularFatorial(5)); // Output: 120
+console.log(calcularFatorial(0)); // Output: 1
+console.log(calcularFatorial(10)); // Output: 3628800
+console.log(calcularFatorial(-3)); // Output: O número deve ser um inteiro positivo.
+
+
+10
+function areAnagrams(word1, word2) {
+  // Removemos espaços e transformamos as palavras em letras minúsculas
+  const cleanedWord1 = word1.toLowerCase().replace(/\s/g, '');
+  const cleanedWord2 = word2.toLowerCase().replace(/\s/g, '');
+
+  // Verificamos se as palavras têm o mesmo comprimento
+  if (cleanedWord1.length !== cleanedWord2.length) {
+    return false;
+  }
+
+  // Criamos objetos para contar a frequência de cada letra nas palavras
+  const freq1 = {};
+  const freq2 = {};
+
+  // Preenchemos os objetos de frequência para cada palavra
+  for (let char of cleanedWord1) {
+    freq1[char] = (freq1[char] || 0) + 1;
+  }
+
+  for (let char of cleanedWord2) {
+    freq2[char] = (freq2[char] || 0) + 1;
+  }
+
+  // Verificamos se as frequências de cada letra são iguais nas palavras
+  for (let char in freq1) {
+    if (freq1[char] !== freq2[char]) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+// Exemplos de uso:
+console.log(areAnagrams("amor", "roma")); // Output: true
+console.log(areAnagrams("listen", "silent")); // Output: true
+console.log(areAnagrams("hello", "world")); // Output: false
+
+
+11
+function celsiusToFahrenheit(celsius) {
+  const fahrenheit = (celsius * 9/5) + 32;
+  return fahrenheit;
+}
+
+// Exemplo de uso:
+const temperaturaCelsius = 25;
+const temperaturaFahrenheit = celsiusToFahrenheit(temperaturaCelsius);
+console.log(temperaturaFahrenheit); // Output: 77
+
+12
+function isPerfectSquare(number) {
+  // Verificamos se o número é um inteiro positivo
+  if (number < 0 || !Number.isInteger(number)) {
+    return false;
+  }
+
+  // Calculamos a raiz quadrada do número
+  const squareRoot = Math.sqrt(number);
+
+  // Verificamos se a raiz quadrada é um número inteiro
+  return Number.isInteger(squareRoot);
+}
+
+// Exemplos de uso:
+console.log(isPerfectSquare(25)); // Output: true
+console.log(isPerfectSquare(16)); // Output: true
+console.log(isPerfectSquare(27)); // Output: false
+console.log(isPerfectSquare(0)); // Output: true
+console.log(isPerfectSquare(-4)); // Output: false
+
+
+13
+function countVowels(str) {
+  // Transformamos a string em letras minúsculas
+  const lowerCaseStr = str.toLowerCase();
+
+  // Definimos as vogais
+  const vowels = ["a", "e", "i", "o", "u"];
+
+  // Inicializamos o contador de vogais
+  let count = 0;
+
+  // Percorremos a string e contamos as vogais
+  for (let i = 0; i < lowerCaseStr.length; i++) {
+    if (vowels.includes(lowerCaseStr[i])) {
+      count++;
+    }
+  }
+
+  return count;
+}
+
+// Exemplo de uso:
+const inputString = "Hello World";
+const vowelCount = countVowels(inputString);
+console.log(vowelCount); // Output: 3
+
+
+14
+function ehPrimo(num) {
+  if (num <= 1) {
+    return false;
+  } else if (num <= 3) {
+    return true;
+  } else if (num % 2 === 0 || num % 3 === 0) {
+    return false;
+  }
+  
+  let i = 5;
+  while (i * i <= num) {
+    if (num % i === 0 || num % (i + 2) === 0) {
+      return false;
+    }
+    i += 6;
+  }
+  return true;
+}
+
+function ehNumeroPrimoDeFibonacci(num) {
+  // Verifica se o número é primo
+  if (!ehPrimo(num)) {
+    return false;
+  }
+
+  // Verifica se o número está na sequência de Fibonacci
+  let a = 0;
+  let b = 1;
+  while (b <= num) {
+    if (b === num) {
+      return true;
+    }
+    let temp = b;
+    b = a + b;
+    a = temp;
+  }
+  return false;
+}
+
+// Exemplo de uso
+console.log(ehNumeroPrimoDeFibonacci(2));  // true
+console.log(ehNumeroPrimoDeFibonacci(3));  // true
+console.log(ehNumeroPrimoDeFibonacci(5));  // true
+console.log(ehNumeroPrimoDeFibonacci(7));  // false
+console.log(ehNumeroPrimoDeFibonacci(13)); // true
+console.log(ehNumeroPrimoDeFibonacci(17)); // false
+
+
+15
+function gerarCorAleatoria() {
+  var letras = '0123456789ABCDEF';
+  var cor = '#';
+  for (var i = 0; i < 6; i++) {
+    cor += letras[Math.floor(Math.random() * 16)];
+  }
+  return cor;
+}
+
+var corAleatoria = gerarCorAleatoria();
+
+document.body.style.backgroundColor = corAleatoria;
+document.getElementById('cor-aleatoria').textContent = corAleatoria;
+
+
+
+
